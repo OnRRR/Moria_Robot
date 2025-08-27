@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- LIDAR-->
+    <joint name="lidar_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="lidar"/>
+        <origin xyz="0.2222 0 0.2129" rpy="0 0 0"/>
+    </joint>
+
+    <link name="lidar">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find moria_description)/meshes/lidar.STL"/>
+            </geometry>
+            <material name="cyan">
+                <color rgba="0.3137 0.6941 0.7843 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find moria_description)/meshes/lidar.STL"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1.33"/>
+            <inertia 
+                ixx="0.00061" ixy="0.0" ixz="-0.00015"
+                iyy="0.00097" iyz="0.0"
+                izz="0.00110" />
+        </inertial>
+    </link>
+
+
+
+
+    <!-- CAMERA-->
+    <joint name="camera_joint" type="fixed">
+        <parent link="body"/>
+        <child link="camera"/>
+        <origin xyz="0.0739 0 0.5085" rpy="0 0 0"/>
+    </joint>
+
+    <link name="camera">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find moria_description)/meshes/camera.STL"/>
+            </geometry>
+            <material name="cyan">
+                <color rgba="0.3137 0.6941 0.7843 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find moria_description)/meshes/camera.STL"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.10791"/>
+            <inertia 
+                ixx="0.00007" ixy="0.0" ixz="0.0"
+                iyy="0.000008" iyz="0.0"
+                izz="0.00007" />
+        </inertial>
+    </link>
+
+    <!-- CAMERA RGB FRAME-->
+    <joint name="camera_rgb_joint" type="fixed">
+        <parent link="camera"/>
+        <child link="camera_rgb_frame"/>
+        <origin xyz="0 0.02 0.015" rpy="0 0 0"/>
+    </joint>
+    <link name="camera_rgb_frame"/>
+
+    <joint name="camera_depth_joint" type="fixed">
+        <parent link="camera"/>
+        <child link="camera_depth_frame"/>
+        <origin xyz="0 -0.02 0.015" rpy="-1.57 0 -1.57"/>
+    </joint>
+    <link name="camera_depth_frame"/>
+
+    <joint name="camera_point_joint" type="fixed">
+        <parent link="camera"/>
+        <child link="camera_point_frame"/>
+        <origin rpy="-1.57 1.57 3.14" xyz="0 0.02 0.015"/>
+    </joint>
+    <link name="camera_point_frame"/>
+</robot>
