@@ -1,3 +1,5 @@
+Yapımcılar: Kadir Kemal Temel, Onur Eren Sevdi
+
 # 1. Genel Paketleme Özeti
 
 ## 1.1 `moria_bringup`
